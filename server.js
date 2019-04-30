@@ -22,4 +22,9 @@ io.sockets.on('connection',function(socket){
 		connections.splice(connections.indexOf(socket) , 1);
 		console.log('Disconnected: %s sockets connected',connections.length);
 	});
+
+	//Send messages
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+});
 });
