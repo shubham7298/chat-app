@@ -19,12 +19,28 @@ io.sockets.on('connection',function(socket){
 
 	//disconnect
 	socket.on('disconnect', function(data){
+		// if(!socket.username)	return;
+		users.splice(users.indexOf(socket.username) , 1);
+		updateUsernames();
 		connections.splice(connections.indexOf(socket) , 1);
 		console.log('Disconnected: %s sockets connected',connections.length);
 	});
 
 	//Send messages
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-});
+	  socket.on('chat message', function(msg){
+	    io.emit('chat message', msg);
+	});
+
+	// New User
+	socket.on('new user', function(data, callback){
+		callback(true);
+		socket.username = data;
+		console.log('--'+data);
+		users.push(socket.username);
+		updateUsernames();
+	});
+
+	function updateUsernames(){
+		io.sockets.emit('get users',users);
+	}
 });
