@@ -5,8 +5,8 @@ var io = require('socket.io').listen(server);
 users = [];
 connections = [];
 
-// server.listen(process.env.PORT || 5000);
-server.listen(5000,'Your_IP');
+server.listen(process.env.PORT || 5000);
+// server.listen(5000,'Your_IP');			
 console.log("Server running on port 5000");
 
 //Serving HTML
