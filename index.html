@@ -61,9 +61,11 @@
       $('#m').val('');
       return false;
     });
-    socket.on('chat message', function(msg){
-      $('#messages').append($('<li>').text(msg));
-      	console.log('#message');
+    socket.on('chat message', function(data){
+      // $('#messages').append($('<li>').text('<strong>'+data.user+'</strong>'+':'+data.msg));
+      if(data.user)
+            $('#messages').append($('<li><strong>'+data.user+'</strong>'+':'+data.msg+'</li>'));
+      	console.log($('#message'));
     });
 
     $('#userform').submit(function(e){
@@ -82,7 +84,7 @@
     	for(i=0 ; i<data.length;i++){
     	 cool += '<li class="list-group-item">'+data[i]+'</li>';
     	}
-    	console.log(cool);
+    	// console.log(cool);
     	$('#users').html(cool);
     });
   });
